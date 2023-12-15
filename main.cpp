@@ -1,11 +1,10 @@
+#include "Helper_Functions.h"
 #include "Product.cpp"
-
-
-
 int main()
 {
-
-
-getchar();
-return 0;
+    Product p1;
+    clearscreen();
+    p1.displayProductDetails();
+    getchar();
+    return 0;
 }
