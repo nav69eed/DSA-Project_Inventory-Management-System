@@ -5,6 +5,8 @@ int main()
     ProductList List;
     List.Add_Product();
     List.Add_Product();
+    List.Add_Product();
+    List.Add_Product();
     clearscreen();
     List.Show_Products();
     getchar();

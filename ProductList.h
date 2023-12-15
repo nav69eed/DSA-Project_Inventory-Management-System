@@ -5,6 +5,8 @@ class ProductList
 {
 private:
     Product *Head = nullptr;
+    bool isPresent(int id);
+
 public:
     ProductList();
     void Add_Product();

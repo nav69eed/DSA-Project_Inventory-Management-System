@@ -14,10 +14,11 @@ private:
     void calculate_Discount();
 
 public:
+int get_Product_ID();
     Product *nextProduct;
     void Add_Product_Details();
     void displayProductDetails();
-    Product();
+    Product(int id);
     ~Product();
 };
 #endif // Product_h

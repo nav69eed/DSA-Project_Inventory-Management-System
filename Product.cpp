@@ -1,7 +1,7 @@
 #include "Product.h"
-Product::Product()
+Product::Product(int id)
 {
-    Product_ID = 0;
+    Product_ID = id;
     Quantity_Remaining = 0;
     Quantity_Sold = 0;
     Base_Price = 0.0;
@@ -13,8 +13,6 @@ Product::Product()
 void Product::Add_Product_Details()
 {
     cout << "\n\n********ADDING PRODUCT**********\n\n";
-    cout << "Enter Product ID  ";
-    cin >> Product_ID;
     cout << "Enter Product Name : ";
     cin.ignore();
     getline(cin, Product_Name);
@@ -55,4 +53,8 @@ void Product::displayProductDetails()
 }
 Product::~Product()
 {
+}
+int Product::get_Product_ID()
+{
+    return Product_ID;
 }
