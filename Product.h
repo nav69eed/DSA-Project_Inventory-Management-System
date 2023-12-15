@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+
 class Product
 {
 private:
@@ -11,11 +12,12 @@ private:
     double Base_Price, Sale_Price, Discount, Discount_Percentage;
     string Manufacturing_Date, Date_Received, Expiry_Date;
     void calculate_Discount();
-    void Add_Product_Details();
+
 public:
+    Product *nextProduct;
+    void Add_Product_Details();
     void displayProductDetails();
     Product();
     ~Product();
 };
-
 #endif // Product_h

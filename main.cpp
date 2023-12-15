@@ -1,10 +1,12 @@
 #include "Helper_Functions.h"
-#include "Product.cpp"
+#include "ProductList.cpp"
 int main()
 {
-    Product p1;
+    ProductList List;
+    List.Add_Product();
+    List.Add_Product();
     clearscreen();
-    p1.displayProductDetails();
+    List.Show_Products();
     getchar();
     return 0;
 }
