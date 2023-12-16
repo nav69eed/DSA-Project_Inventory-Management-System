@@ -21,6 +21,7 @@ bool ProductList::isPresent(int id)
 }
 void ProductList::Add_Product()
 {
+    cout << "\n\n********ADDING PRODUCT**********\n\n";
     int Product_ID;
     do
     {

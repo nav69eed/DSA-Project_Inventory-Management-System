@@ -12,7 +12,6 @@ Product::Product(int id)
 }
 void Product::Add_Product_Details()
 {
-    cout << "\n\n********ADDING PRODUCT**********\n\n";
     cout << "Enter Product Name : ";
     cin.ignore();
     getline(cin, Product_Name);
