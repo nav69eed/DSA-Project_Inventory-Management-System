@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1703320691 source:c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\main.cpp
+	"helperFunction2.h"
+
+1703321998 c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\include\helperfunction2.h
+	"ProductTree.h"
+
+1703321940 c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\include\producttree.h
+	"Product.h"
+
+1703321850 c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\include\product.h
+	<fstream>
+	"helperFunctions.h"
+
+1703321952 c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\include\helperfunctions.h
+	<cstdlib>
+	<iostream>
+	<string>
+
+1703320410 source:c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\src\product.cpp
+	"Product.h"
+
+1703320470 source:c:\users\naveed akhtar\desktop\code\dsaprojectcodeblock\src\producttree.cpp
+	"ProductTree.h"
+

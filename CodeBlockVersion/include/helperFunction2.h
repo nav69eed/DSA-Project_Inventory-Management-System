@@ -1,4 +1,12 @@
-#include "../ProductTree/ProductTree.cpp"
+#if !defined(helperFunction2_h)
+#define helperFunction2_h
+
+#include "ProductTree.h"
+void clearscreen()
+{
+    system("CLS");
+}
+
 void insertInTree(ProductTree *node)
 {
     int choice;
@@ -60,7 +68,7 @@ start_of_main_menu:
         }
         else
         {
-            clearscreen();
+           clearscreen();
             cout << "Wrong Choice!!!! Try again\n";
             showMenu(tree);
             // goto start_of_main_menu;
@@ -68,3 +76,5 @@ start_of_main_menu:
         cout << "\n\n**************************************************************************\n\n";
     }
 }
+
+#endif // helperFunction2_h
