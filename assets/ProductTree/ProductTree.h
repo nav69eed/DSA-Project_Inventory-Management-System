@@ -11,13 +11,18 @@ private:
     Product *leftRotate(Product *x);
 
     Product *insert(Product *node, int productId /*, other attributes as needed*/);
+    Product *insert(Product *node, int productId, string name,double sPrice/*, other attributes as needed*/);
     void inorderTraversal(Product *node);
     int getBalance(Product *node);
     int getHeight(Product *node);
-    bool isPresent(Product* node,int id);
+    bool isPresent(Product *node, int id);
     bool isPresentInTree(int id);
+    Product *saveSingleProduct(Product *node);
+
 public:
     void insert();
+    void saveToFile();
+    void loadFromFile();
     void inorderTraversal();
     ProductTree();
     ~ProductTree();

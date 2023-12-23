@@ -2,10 +2,13 @@
 int main()
 {
     ProductTree avlTree;
-    insertInTree(&avlTree);
-    clearscreen();
-    avlTree.inorderTraversal();
-    cout << endl;
+    avlTree.loadFromFile();
+    showMenu(&avlTree);
+    // insertInTree(&avlTree);
+    // clearscreen();
+    // avlTree.inorderTraversal();
+    // cout << endl;
+    // avlTree.saveToFile();
     getchar();
     return 0;
 }

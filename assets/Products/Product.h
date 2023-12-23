@@ -1,6 +1,6 @@
 #if !defined(Product_h)
 #define Product_h
-
+#include <fstream>
 #include "../HelperFunctions/helperFunctions.h"
 class Product
 {
@@ -15,9 +15,11 @@ public:
     Product *Left;
     Product *Right;
     int Product_ID;
+    void saveProductToFile();
     int height;
     void displayProductDetails();
     Product(int id);
+    Product(int id,string name,double sPrice);
     ~Product();
 };
 #endif // Product_h

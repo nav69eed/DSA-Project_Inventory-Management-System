@@ -24,3 +24,42 @@ void insertInTree(ProductTree *node)
         }
     }
 }
+
+void showMenu(ProductTree *tree)
+{
+start_of_main_menu:
+    cout << "**************************************************************************\n\n                          WELCOME TO STORE                      \n\n**************************************************************************\n";
+    while (1)
+    {
+        int choice;
+        cout << "Select any Option :\n";
+        cout << "\t1.Show Available Products\n";
+        cout << "\t2.Add a Product\n";
+        cout << "\t3.Save All Products to Files\n";
+        cout << "\tYour Choice : ";
+        cin >> choice;
+        if (choice >= 1 && choice <= 3)
+        {
+            if (choice == 1)
+            {
+                tree->inorderTraversal();
+            }
+            else if (choice == 2)
+            {
+                tree->insert();
+            }
+            else
+            {
+                tree->saveToFile();
+            }
+        }
+        else
+        {
+            clearscreen();
+            cout << "Wrong Choice!!!! Try again\n";
+            showMenu(tree);
+            // goto start_of_main_menu;
+        }
+        cout << "\n\n**************************************************************************\n\n";
+    }
+}

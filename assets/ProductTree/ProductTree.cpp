@@ -90,6 +90,54 @@ Product *ProductTree::insert(Product *node, int Product_ID /*, other attributes 
 
     return node;
 }
+Product *ProductTree::insert(Product *node, int Product_ID, string name, double sPrice /*, other attributes as needed*/)
+{
+    // Perform standard BST insertion
+    if (node == nullptr)
+        return new Product(Product_ID, name, sPrice /*, other attributes as needed*/);
+
+    if (Product_ID < node->Product_ID)
+    {
+        node->Left = insert(node->Left, Product_ID, name, sPrice /*, other attributes as needed*/);
+    }
+    else if (Product_ID > node->Product_ID)
+    {
+        node->Right = insert(node->Right, Product_ID, name, sPrice /*, other attributes as needed*/);
+    }
+    else
+    {
+        // Duplicate keys are not allowed
+        return node;
+    }
+
+    // Update height of current node
+    updateHeight(node);
+
+    // Get the balance factor
+    int balance = getBalance(node);
+
+    // Perform rotations if necessary
+    if (balance > 1 && Product_ID < node->Left->Product_ID)
+    {
+        return rightRotate(node);
+    }
+    if (balance < -1 && Product_ID > node->Right->Product_ID)
+    {
+        return leftRotate(node);
+    }
+    if (balance > 1 && Product_ID > node->Left->Product_ID)
+    {
+        node->Left = leftRotate(node->Left);
+        return rightRotate(node);
+    }
+    if (balance < -1 && Product_ID < node->Right->Product_ID)
+    {
+        node->Right = rightRotate(node->Right);
+        return leftRotate(node);
+    }
+
+    return node;
+}
 
 void ProductTree::inorderTraversal(Product *node)
 {
@@ -105,14 +153,15 @@ void ProductTree::inorderTraversal(Product *node)
 void ProductTree::insert()
 {
     int productId;
+    cout << "\n**************ADDING PRODUCT*****************\n";
     do
     {
         cout << "Enter Product Id : ";
         cin >> productId;
         if (isPresentInTree(productId))
         {
-            cout << "Product Id is Already Present in Stock !!!\n";
-            cout << "Try again\n";
+            cout << "Product Id is Already Present in Stock !!!";
+            cout << " Try again\n";
             continue;
         }
         else
@@ -162,6 +211,47 @@ bool ProductTree::isPresent(Product *node, int id)
 bool ProductTree::isPresentInTree(int id)
 {
     return isPresent(root, id);
+}
+Product *ProductTree::saveSingleProduct(Product *node)
+{
+    if (node != nullptr)
+    {
+        saveSingleProduct(node->Left);
+        node->saveProductToFile(); // Display or process the product information
+        saveSingleProduct(node->Right);
+    }
+}
+
+void ProductTree::saveToFile()
+{
+    ofstream outFile("Products.txt", ios::out | ios::trunc);
+    outFile.close();
+    saveSingleProduct(root);
+}
+
+void ProductTree::loadFromFile()
+{
+    int id;
+    string name, sample, sample1;
+    double sPrice;
+    ifstream inFile("Products.txt", ios::in);
+    if (inFile.is_open())
+    {
+        while (getline(inFile, sample))
+        {
+            getline(inFile, sample);
+            getline(inFile, name);
+            getline(inFile, sample1);
+            id = stoi(sample);
+            sPrice = stod(sample1);
+            root = insert(root, id, name, sPrice);
+        }
+        inFile.close();
+    }
+    else
+    {
+        cout << "Loading Product File Opening Error!!!\n";
+    }
 }
 ProductTree::~ProductTree()
 {

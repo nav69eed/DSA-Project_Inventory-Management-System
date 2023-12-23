@@ -7,6 +7,15 @@ Product::Product(int id)
     Right = nullptr;
     Add_Product_Details();
 }
+Product::Product(int id, string name, double sPrice)
+{
+    Product_ID = id;
+    height = 1;
+    Left = nullptr;
+    Right = nullptr;
+    Product_Name = name;
+    Sale_Price = sPrice;
+}
 
 void Product::Add_Product_Details()
 {
@@ -47,6 +56,24 @@ void Product::displayProductDetails()
     cout << "Product Name: " << Product_Name << endl;
     cout << "Product Sale Price: Rs " << Sale_Price << "/-" << endl;
 }
+
+void Product::saveProductToFile()
+{
+    ofstream OutFile("Products.txt", ios::app | ios::out);
+    if (OutFile.is_open())
+    {
+        OutFile << "*****" << endl;
+        OutFile << Product_ID << endl;
+        OutFile << Product_Name << endl;
+        OutFile << Sale_Price << endl;
+        OutFile.close();
+    }
+    else
+    {
+        cout << "\n\nFile Write Opening Error!!!!!\n";
+    }
+}
+
 Product::~Product()
 {
 }
