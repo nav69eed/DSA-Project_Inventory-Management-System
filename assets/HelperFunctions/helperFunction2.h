@@ -35,10 +35,11 @@ start_of_main_menu:
         cout << "Select any Option :\n";
         cout << "\t1.Show Available Products\n";
         cout << "\t2.Add a Product\n";
-        cout << "\t3.Save All Products to Files\n";
+        cout << "\t3.Delete a Product\n";
+        cout << "\t4.Save All Products to Files\n";
         cout << "\tYour Choice : ";
         cin >> choice;
-        if (choice >= 1 && choice <= 3)
+        if (choice >= 1 && choice <= 4)
         {
             if (choice == 1)
             {
@@ -47,6 +48,10 @@ start_of_main_menu:
             else if (choice == 2)
             {
                 tree->insert();
+            }
+            else if (choice == 3)
+            {
+                tree->Delete();
             }
             else
             {

@@ -253,6 +253,113 @@ void ProductTree::loadFromFile()
         cout << "Loading Product File Opening Error!!!\n";
     }
 }
+Product *ProductTree::deleteNode(Product *root, int Product_ID)
+{
+    // Perform standard BST deletion
+    if (root == nullptr)
+        return root;
+
+    if (Product_ID < root->Product_ID)
+        root->Left = deleteNode(root->Left, Product_ID);
+    else if (Product_ID > root->Product_ID)
+        root->Right = deleteNode(root->Right, Product_ID);
+    else
+    {
+        // Node with only one child or no child
+        if (root->Left == nullptr || root->Right == nullptr)
+        {
+            Product *temp = (root->Left) ? root->Left : root->Right;
+
+            // No child case
+            if (temp == nullptr)
+            {
+                temp = root;
+                root = nullptr;
+            }
+            else               // One child case
+                *root = *temp; // Copy the contents of the non-empty child
+
+            delete temp;
+        }
+        else
+        {
+            // Node with two children, get the inorder successor
+            Product *temp = minValueNode(root->Right);
+
+            // Copy the inorder successor's data to this node
+            root->Product_ID = temp->Product_ID;
+
+            // Delete the inorder successor
+            root->Right = deleteNode(root->Right, temp->Product_ID);
+        }
+    }
+
+    // If the tree had only one node, then return
+    if (root == nullptr)
+        return root;
+
+    // Update height of the current node
+    updateHeight(root);
+
+    // Get the balance factor
+    int balance = getBalance(root);
+
+    // Perform rotations if necessary
+    if (balance > 1 && getBalance(root->Left) >= 0)
+        return rightRotate(root);
+
+    if (balance > 1 && getBalance(root->Left) < 0)
+    {
+        root->Left = leftRotate(root->Left);
+        return rightRotate(root);
+    }
+
+    if (balance < -1 && getBalance(root->Right) <= 0)
+        return leftRotate(root);
+
+    if (balance < -1 && getBalance(root->Right) > 0)
+    {
+        root->Right = rightRotate(root->Right);
+        return leftRotate(root);
+    }
+
+    return root;
+}
+
+Product *ProductTree::minValueNode(Product *node)
+{
+    Product *current = node;
+
+    // Find the leftmost leaf
+    while (current->Left != nullptr)
+        current = current->Left;
+
+    return current;
+}
+
+void ProductTree::Delete()
+{
+    int productId;
+    cout << "\n\n**************Deleting PRODUCT*****************\n\n";
+    inorderTraversal(root);
+    do
+    {
+        cout << "Enter Product Id : ";
+        cin >> productId;
+        if (isPresentInTree(productId))
+        {
+            break;
+        }
+        else
+        {
+            cout << "Product Id is not Present in Stock !!!";
+            cout << " Try again\n";
+            continue;
+        }
+    } while (1);
+    root = deleteNode(root, productId);
+}
+
 ProductTree::~ProductTree()
 {
 }

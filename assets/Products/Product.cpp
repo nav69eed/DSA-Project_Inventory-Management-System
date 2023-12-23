@@ -62,7 +62,7 @@ void Product::saveProductToFile()
     ofstream OutFile("Products.txt", ios::app | ios::out);
     if (OutFile.is_open())
     {
-        OutFile << "*****" << endl;
+        OutFile << "****************************" << endl;
         OutFile << Product_ID << endl;
         OutFile << Product_Name << endl;
         OutFile << Sale_Price << endl;
