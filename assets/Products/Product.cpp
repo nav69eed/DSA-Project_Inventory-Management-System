@@ -2,14 +2,12 @@
 Product::Product(int id)
 {
     Product_ID = id;
-    Quantity_Remaining = 0;
-    Quantity_Sold = 0;
-    Base_Price = 0.0;
-    Sale_Price = 0.0;
-    Discount_Percentage = 0.0;
-    Discount = 0;
+    height = 1;
+    Left = nullptr;
+    Right = nullptr;
     Add_Product_Details();
 }
+
 void Product::Add_Product_Details()
 {
     cout << "Enter Product Name : ";
@@ -42,7 +40,6 @@ void Product::calculate_Discount()
     Discount = (Discount_Percentage / 100) * Base_Price;
     Sale_Price = (Base_Price) - (Discount);
 }
-
 void Product::displayProductDetails()
 {
     cout << "\n\n*************DISPLAYING PRODUCT**************\n\n";
@@ -52,8 +49,4 @@ void Product::displayProductDetails()
 }
 Product::~Product()
 {
-}
-int Product::get_Product_ID()
-{
-    return Product_ID;
 }

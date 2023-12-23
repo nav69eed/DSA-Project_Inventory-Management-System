@@ -1,14 +1,11 @@
-#include "Helper_Functions.h"
-#include "ProductList.cpp"
+#include "assets/HelperFunctions/helperFunction2.h"
 int main()
 {
-    ProductList List;
-    List.Add_Product();
-    List.Add_Product();
-    List.Add_Product();
-    List.Add_Product();
+    ProductTree avlTree;
+    insertInTree(&avlTree);
     clearscreen();
-    List.Show_Products();
+    avlTree.inorderTraversal();
+    cout << endl;
     getchar();
     return 0;
 }
