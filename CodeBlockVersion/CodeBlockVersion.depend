@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1703768971 source:z:\dsa-project_inventory-management-system\codeblockversion\main.cpp
+	"helperfunctions2.h"
+
+1703769046 z:\dsa-project_inventory-management-system\codeblockversion\include\helperfunctions2.h
+	"ProductTree.h"
+	<queue>
+
+1703769135 z:\dsa-project_inventory-management-system\codeblockversion\include\producttree.h
+	"Products.h"
+
+1703769359 z:\dsa-project_inventory-management-system\codeblockversion\include\products.h
+	<fstream>
+	<cstdlib>
+	"helperfunctions.h"
+	<cstdlib>
+	<iostream>
+	<string>
+
+1703769351 z:\dsa-project_inventory-management-system\codeblockversion\include\helperfunctions.h
+
+1703768803 source:z:\dsa-project_inventory-management-system\codeblockversion\src\helperfunctions.cpp
+
+1703768847 source:z:\dsa-project_inventory-management-system\codeblockversion\src\helperfunctions2.cpp
+
+1703768994 source:z:\dsa-project_inventory-management-system\codeblockversion\src\products.cpp
+	"Products.h"
+
+1703769161 source:z:\dsa-project_inventory-management-system\codeblockversion\src\producttree.cpp
+	"ProductTree.h"
+
