@@ -9,6 +9,11 @@
         "vector": "cpp",
         "ostream": "cpp",
         "iosfwd": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "xstring": "cpp",
+        "system_error": "cpp",
+        "xlocale": "cpp",
+        "fstream": "cpp",
+        "queue": "cpp"
     }
 }

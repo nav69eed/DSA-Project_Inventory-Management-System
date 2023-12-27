@@ -90,19 +90,19 @@ Product *ProductTree::insert(Product *node, int Product_ID /*, other attributes 
 
     return node;
 }
-Product *ProductTree::insert(Product *node, int Product_ID, string name, double sPrice /*, other attributes as needed*/)
+Product *ProductTree::insert(Product *node, int productId, string name, string brand_name, string color, string Product_Category, string shelf_location, double base_price, double sale_price, double discount, double discount_percentage, int q_remaining, int q_sold, string M_date, string R_date, string E_date)
 {
     // Perform standard BST insertion
     if (node == nullptr)
-        return new Product(Product_ID, name, sPrice /*, other attributes as needed*/);
+        return new Product(productId, name, brand_name, color, Product_Category, shelf_location, base_price, sale_price, discount, discount_percentage, q_remaining, q_sold, M_date, R_date, E_date);
 
-    if (Product_ID < node->Product_ID)
+    if (productId < node->Product_ID)
     {
-        node->Left = insert(node->Left, Product_ID, name, sPrice /*, other attributes as needed*/);
+        node->Left = insert(node->Left, productId, name, brand_name, color, Product_Category, shelf_location, base_price, sale_price, discount, discount_percentage, q_remaining, q_sold, M_date, R_date, E_date);
     }
-    else if (Product_ID > node->Product_ID)
+    else if (productId > node->Product_ID)
     {
-        node->Right = insert(node->Right, Product_ID, name, sPrice /*, other attributes as needed*/);
+        node->Right = insert(node->Right, productId, name, brand_name, color, Product_Category, shelf_location, base_price, sale_price, discount, discount_percentage, q_remaining, q_sold, M_date, R_date, E_date);
     }
     else
     {
@@ -117,25 +117,24 @@ Product *ProductTree::insert(Product *node, int Product_ID, string name, double 
     int balance = getBalance(node);
 
     // Perform rotations if necessary
-    if (balance > 1 && Product_ID < node->Left->Product_ID)
+    if (balance > 1 && productId < node->Left->Product_ID)
     {
         return rightRotate(node);
     }
-    if (balance < -1 && Product_ID > node->Right->Product_ID)
+    if (balance < -1 && productId > node->Right->Product_ID)
     {
         return leftRotate(node);
     }
-    if (balance > 1 && Product_ID > node->Left->Product_ID)
+    if (balance > 1 && productId > node->Left->Product_ID)
     {
         node->Left = leftRotate(node->Left);
         return rightRotate(node);
     }
-    if (balance < -1 && Product_ID < node->Right->Product_ID)
+    if (balance < -1 && productId < node->Right->Product_ID)
     {
         node->Right = rightRotate(node->Right);
         return leftRotate(node);
     }
-
     return node;
 }
 
@@ -173,6 +172,7 @@ void ProductTree::insert()
 // Public function to perform an inorder traversal of the AVL tree
 void ProductTree::inorderTraversal()
 {
+    cout << "\n\n*************DISPLAYING PRODUCT**************\n\n";
     inorderTraversal(root);
 }
 int ProductTree::getBalance(Product *node)
@@ -188,6 +188,50 @@ int ProductTree::getHeight(Product *node)
     return node->height;
 }
 
+void ProductTree::P_viewProductDetail()
+{
+    int productId;
+    do
+    {
+        cout << "Enter Product Id : ";
+        cin >> productId;
+        if (!(isPresentInTree(productId)))
+        {
+            cout << "Product Id is Not Present in Stock !!!";
+            cout << " Try again\n";
+            continue;
+        }
+        else
+            break;
+    } while (1);
+    Product *node = Search_Product(root, productId);
+    node->showProductDetails();
+}
+
+Product *ProductTree::Search_Product(Product *node, int P_id)
+{
+    if (node == nullptr)
+    {
+        // Product not found, return nullptr
+        return nullptr;
+    }
+
+    if (P_id < node->Product_ID)
+    {
+        // Search in the left subtree
+        return Search_Product(node->Left, P_id);
+    }
+    else if (P_id > node->Product_ID)
+    {
+        // Search in the right subtree
+        return Search_Product(node->Right, P_id);
+    }
+    else
+    {
+        // P_id matches the current node's Product_ID
+        return node; // Product found
+    }
+}
 bool ProductTree::isPresent(Product *node, int id)
 {
     if (node == nullptr)
@@ -231,20 +275,37 @@ void ProductTree::saveToFile()
 
 void ProductTree::loadFromFile()
 {
-    int id;
-    string name, sample, sample1;
-    double sPrice;
+    int id, Qr, Qs;
+    string ch[15];
+    double Sp, Bp, Disc, Disc_p;
     ifstream inFile("Products.txt", ios::in);
     if (inFile.is_open())
     {
-        while (getline(inFile, sample))
+        while (getline(inFile, ch[0]))
         {
-            getline(inFile, sample);
-            getline(inFile, name);
-            getline(inFile, sample1);
-            id = stoi(sample);
-            sPrice = stod(sample1);
-            root = insert(root, id, name, sPrice);
+            getline(inFile, ch[0]);
+            getline(inFile, ch[1]);
+            getline(inFile, ch[2]);
+            getline(inFile, ch[3]);
+            getline(inFile, ch[4]);
+            getline(inFile, ch[5]);
+            getline(inFile, ch[6]);
+            getline(inFile, ch[7]);
+            getline(inFile, ch[8]);
+            getline(inFile, ch[9]);
+            getline(inFile, ch[10]);
+            getline(inFile, ch[11]);
+            getline(inFile, ch[12]);
+            getline(inFile, ch[13]);
+            getline(inFile, ch[14]);
+            id = stoi(ch[0]);
+            Qr = stoi(ch[10]);
+            Qs = stoi(ch[11]);
+            Sp = stod(ch[7]);
+            Bp = stod(ch[6]);
+            Disc = stod(ch[8]);
+            Disc_p = stod(ch[9]);
+            root = insert(root, id, ch[1], ch[2], ch[3], ch[4], ch[5], Bp, Sp, Disc, Disc_p, Qr, Qs, ch[12], ch[13], ch[14]);
         }
         inFile.close();
     }
@@ -268,7 +329,15 @@ Product *ProductTree::deleteNode(Product *root, int Product_ID)
         // Node with only one child or no child
         if (root->Left == nullptr || root->Right == nullptr)
         {
-            Product *temp = (root->Left) ? root->Left : root->Right;
+            Product *temp;
+            if (root->Left != NULL)
+            {
+                temp = root->Left;
+            }
+            else
+            {
+                temp = root->Right;
+            }
 
             // No child case
             if (temp == nullptr)
@@ -358,6 +427,37 @@ void ProductTree::Delete()
         }
     } while (1);
     root = deleteNode(root, productId);
+}
+
+void ProductTree::Update_Product()
+{
+    int productId;
+    cout << "\n\n**************Updating PRODUCT*****************\n\n";
+    inorderTraversal(root);
+    do
+    {
+        cout << "Enter Product Id : ";
+        cin >> productId;
+        if (isPresentInTree(productId))
+        {
+            break;
+        }
+        else
+        {
+            cout << "Product Id is not Present in Stock !!!";
+            cout << " Try again\n";
+            continue;
+        }
+    } while (1);
+    Product *node = Search_Product(root, productId);
+    int temp;
+    do
+    {
+        cout << "Enter Stock Amount : ";
+        cin >> temp;
+    } while (!(temp >= 0));
+    node->Quantity_Remaining = temp;
+    cout << "\n\n**************PRODUCT UPDATED*****************\n\n";
 }
 
 ProductTree::~ProductTree()
