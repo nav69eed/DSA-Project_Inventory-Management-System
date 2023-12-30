@@ -1,7 +1,5 @@
 # Inventory Management System
 
-![Project Logo/Icon](url/to/your/logo.png)
-
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/yourusername/your-repo.svg)](https://github.com/yourusername/your-repo/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/yourusername/your-repo.svg)](https://github.com/yourusername/your-repo/pulls)
@@ -29,5 +27,5 @@ This Inventory Management System is built in C++ and utilizes AVL trees to effic
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/yourusername/your-repo.git
+   git clone https://github.com/nav69eed/Inventory_Management_System_DSA_Project.git
 
